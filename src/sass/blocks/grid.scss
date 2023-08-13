@@ -1,0 +1,45 @@
+.grid {
+  width: 30rem;
+  height: 60vh;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+
+  background-color: #000;
+
+  &__btn {
+    background-color: #ccc;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.8rem;
+    color: $white;
+    background-color: $lightGray;
+    border-radius: 10px;
+
+    &:hover {
+        border: 1px solid $white;
+        filter: brightness(115%);
+    }
+  }
+}
+
+.clean {
+    background-color: $lightRed;
+}
+
+.dark-gray {
+    background-color: $darkGray;
+}
+
+#equal {
+  grid-row: span 2;
+  background-color: $blue;
+}
+
+#zero {
+  grid-column: span 2;
+}

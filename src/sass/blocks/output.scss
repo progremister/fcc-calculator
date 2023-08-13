@@ -1,0 +1,23 @@
+
+.output {
+  width: 100%;
+  height: 14%;
+  padding: 1rem 1.2rem 0;
+  text-align: right;
+  font-family: 'Space Mono', monospace;
+}
+
+#expression {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  text-align: right;
+  font-size: 1.4rem;
+  color: $lightGray;
+  font-family: 'Space Mono', monospace;
+}
+
+#display {
+    font-size: 2.4rem;
+    font-weight: 500;
+}
