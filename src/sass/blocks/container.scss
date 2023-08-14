@@ -10,9 +10,10 @@
 .calculator {
     width: 60%;
     max-width: 30rem;
+    min-height: 70vh;
     background-color: $black;
     border-radius: 10px;
-    padding: 1rem 0;
+    padding: 1rem 0 2rem;
     box-shadow: 0 0 20px 5px rgba(255, 255, 255, .30);
     overflow: hidden;
 }
