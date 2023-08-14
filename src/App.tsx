@@ -1,43 +1,114 @@
-import { useState } from 'react'
-import './sass/style.scss'
+import { useEffect, useState } from "react";
+import "./sass/style.scss";
 
 function App() {
-  const [calculation, setCalculation] = useState({
-    number: "",
-    expression: "",
-    answer: "0"
-  });
+  const [display, setDisplay] = useState<string>("0");
+
+  useEffect(() => {
+    console.log(`${display} ${typeof display}`);
+    
+  }, [display])
+  
+
+  const handleNumber = (number: string) => {
+    console.log(display);
+    if (display === '0') {
+      setDisplay(number);
+    } else {
+      setDisplay(display + number);
+    }
+  };
+
+  const handleOperator = (operator: string) => {
+    setDisplay(`${display} ${operator} `);
+  }
+
+  const handleEqual = () => {
+    setDisplay(eval(display).toString());
+  }
+
+  const handleDecimal = () => {
+    const array = display.toString().split(' ');
+    const lastElement = array[array.length - 1];
+
+    if(!lastElement.includes(".")) {
+      setDisplay(display + '.');
+    }
+  }
+
+  const handleCleanAll = () => {
+    setDisplay("0");
+  }
+
+  const handleClean = () => {
+    display === '' ? '0' : setDisplay(prev => prev.toString().split("").slice(0, prev.toString().length - 1).join(""));
+  }
 
   return (
     <div className="container">
       <div className="calculator">
         <div className="output">
-          <input type="text" id="expression" placeholder='0' value={calculation.expression} disabled/>
-          <h4 id="display">{calculation.answer}</h4>
+          <h4 id="display">{display}</h4>
         </div>
         <div className="grid">
-          <div className="grid__btn clean" id="cleanAll">AC</div>
-          <div className="grid__btn clean" id="clean">C</div>
-          <div className="grid__btn dark-gray" id="divide">/</div>
-          <div className="grid__btn dark-gray" id="multiply">*</div>
-          <div className="grid__btn" id="seven">7</div>
-          <div className="grid__btn" id="eight">8</div>
-          <div className="grid__btn" id="nine">9</div>
-          <div className="grid__btn dark-gray" id="subtract">-</div>
-          <div className="grid__btn" id="five">5</div>
-          <div className="grid__btn" id="six">6</div>
-          <div className="grid__btn" id="seven">7</div>
-          <div className="grid__btn dark-gray" id="add">+</div>
-          <div className="grid__btn" id="one">1</div>
-          <div className="grid__btn" id="two">2</div>
-          <div className="grid__btn" id="three">3</div>
-          <div className="grid__btn" id="equal">=</div>
-          <div className="grid__btn" id="zero">0</div>
-          <div className="grid__btn" id="decimal">.</div>
+          <div className="grid__btn clean" id="clear" onClick={handleCleanAll}>
+            AC
+          </div>
+          <div className="grid__btn clean" id="clean1Digit" onClick={handleClean}>
+            C
+          </div>
+          <div className="grid__btn dark-gray" id="divide" onClick={() => handleOperator("/")}>
+            /
+          </div>
+          <div className="grid__btn dark-gray" id="multiply" onClick={() => handleOperator("*")}>
+            *
+          </div>
+          <div className="grid__btn" id="seven" onClick={() => handleNumber("7")}>
+            7
+          </div>
+          <div className="grid__btn" id="eight" onClick={() => handleNumber("8")}>
+            8
+          </div>
+          <div className="grid__btn" id="nine" onClick={() => handleNumber("9")}>
+            9
+          </div>
+          <div className="grid__btn dark-gray" id="subtract" onClick={() => handleOperator("-")}>
+            -
+          </div>
+          <div className="grid__btn" id="four" onClick={() => handleNumber("4")}>
+            4
+          </div>
+          <div className="grid__btn" id="five" onClick={() => handleNumber("5")}>
+            5
+          </div>
+          <div className="grid__btn" id="six" onClick={() => handleNumber("6")}>
+            6
+          </div>
+          <div className="grid__btn dark-gray" id="add" onClick={() => handleOperator("+")}>
+            +
+          </div>
+          <div className="grid__btn" id="one" onClick={() => handleNumber("1")}>
+            1
+          </div>
+          <div className="grid__btn" id="two" onClick={() => handleNumber("2")}>
+            2
+          </div>
+          <div className="grid__btn" id="three" onClick={() => handleNumber("3")}>
+            3
+          </div>
+          <div className="grid__btn" id="equals" onClick={handleEqual}>
+            =
+          </div>
+          <div className="grid__btn" id="zero" onClick={() => handleNumber("0")}>
+            0
+          </div>
+          <div className="grid__btn" id="decimal" onClick={handleDecimal}>
+            .
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
